@@ -1,11 +1,13 @@
 package com.francislevesque.climbinggradeconverter.activities
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.francislevesque.climbinggradeconverter.R
 import com.francislevesque.climbinggradeconverter.adapters.GradingSystemRecycleAdapter
 import com.francislevesque.climbinggradeconverter.services.DataService
+import com.francislevesque.climbinggradeconverter.utilities.EXTRA_FROM_SYSTEM
 import kotlinx.android.synthetic.main.climbing_grades.*
 
 class ClimbingGradesActivity : AppCompatActivity() {
@@ -16,7 +18,14 @@ class ClimbingGradesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.climbing_grades)
 
-        adapter = GradingSystemRecycleAdapter(this, DataService.climbingSystems)
+        adapter = GradingSystemRecycleAdapter(this, DataService.climbingSystems) { currentSelection ->
+            if (currentSelection.readyToConvert) {
+                val conversionIntent = Intent(this, ConvertActivity::class.java)
+                conversionIntent.putExtra(EXTRA_FROM_SYSTEM, )
+                conversionIntent.putExtra(EXTRA_TO_SYSTEM, )
+                startActivity(conversionIntent)
+            }
+        }
         climbingSystemsView.adapter = adapter
         val layoutManager = LinearLayoutManager(this)
         climbingSystemsView.layoutManager = layoutManager

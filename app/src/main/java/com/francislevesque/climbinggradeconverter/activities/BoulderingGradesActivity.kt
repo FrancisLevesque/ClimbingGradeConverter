@@ -16,7 +16,9 @@ class BoulderingGradesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.bouldering_grades)
 
-        adapter = GradingSystemRecycleAdapter(this, DataService.boulderSystems)
+        adapter = GradingSystemRecycleAdapter(this, DataService.boulderSystems) {
+            // TODO
+        }
         boulderSystemsView.adapter = adapter
         val layoutManager = LinearLayoutManager(this)
         boulderSystemsView.layoutManager = layoutManager
