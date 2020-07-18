@@ -2,6 +2,7 @@ package com.francislevesque.climbinggradeconverter.models
 
 import android.os.Parcel
 import android.os.Parcelable
+import com.francislevesque.climbinggradeconverter.services.DataService
 
 class GradingSystem(val name: String? = "", val image: String? = "", val subtext: String? = "") : Parcelable {
     constructor(parcel: Parcel) : this(
@@ -29,5 +30,9 @@ class GradingSystem(val name: String? = "", val image: String? = "", val subtext
         override fun newArray(size: Int): Array<GradingSystem?> {
             return arrayOfNulls(size)
         }
+    }
+
+    fun dataset() : List<Grade> {
+        return DataService.fetchGrades(name)
     }
 }

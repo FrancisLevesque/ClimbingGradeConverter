@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.activity_grades.*
 
 class GradesActivity : AppCompatActivity() {
 
-    lateinit var adapter: GradingSystemRecycleAdapter
+    private lateinit var adapter: GradingSystemRecycleAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
