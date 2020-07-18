@@ -17,5 +17,7 @@ class ConvertActivity : AppCompatActivity() {
 
         fromTextTitle.text = fromSystem.name
         toTextTitle.text = toSystem.name
+
+        // TODO: Change from scroll view to recycle view adapter
     }
 }

@@ -17,7 +17,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".activities.BoulderingGradesActivity"/>
-        <activity android:name=".activities.ClimbingGradesActivity"/>
+        <activity android:name=".activities.GradesActivity"/>
         <activity android:name=".activities.ConvertActivity"/>
     </application>
 

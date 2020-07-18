@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.francislevesque.climbinggradeconverter.R
+import com.francislevesque.climbinggradeconverter.utilities.EXTRA_CLIMBING_TYPE
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -13,12 +14,16 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         boulderingSelected.setOnClickListener {
-            val climbingIntent = Intent(this, BoulderingGradesActivity::class.java)
-            startActivity(climbingIntent)
+            startActivity("bouldering")
         }
         climbingSelected.setOnClickListener {
-            val climbingIntent = Intent(this, ClimbingGradesActivity::class.java)
-            startActivity(climbingIntent)
+            startActivity("climbing")
         }
+    }
+
+    private fun startActivity(selection: String) {
+        val climbingIntent = Intent(this, GradesActivity::class.java)
+        climbingIntent.putExtra(EXTRA_CLIMBING_TYPE, selection)
+        startActivity(climbingIntent)
     }
 }
