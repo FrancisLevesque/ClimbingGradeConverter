@@ -14,39 +14,47 @@ import com.francislevesque.climbinggradeconverter.models.GradingSystem
 
 class GradingSystemRecycleAdapter(private val context: Context, private val gradingSystems: List<GradingSystem>, private val gradeClick : (Holder) -> Unit) : RecyclerView.Adapter<GradingSystemRecycleAdapter.Holder>() {
     var convertIsStaged = false
+    var convertIsReady = false
     var selectedImage = ImageView(context)
     lateinit var selectedSystem : GradingSystem
 
-    inner class Holder(itemView: View, val gradeClick : (GradingSystem) -> Unit) : RecyclerView.ViewHolder(itemView) {
+    inner class Holder(itemView: View, val gradeClick: (Holder) -> Unit) : RecyclerView.ViewHolder(itemView) {
         val gradingSystemImage = itemView.findViewById<ImageView>(R.id.gradingSystemImage)
         val gradingSystemText = itemView.findViewById<TextView>(R.id.gradingSystemText)
         val gradingSystemSubtext = itemView.findViewById<TextView>(R.id.gradingSystemSubtext)
 
-        var readyToConvert = false
+        lateinit var toSystem : GradingSystem
+        lateinit var fromSystem : GradingSystem
 
-        fun bindGradingSystem(gradingSystem: GradingSystem, context: Context) {
+        fun readyToConvert() : Boolean {
+            return convertIsReady
+        }
+
+        fun fromSystemName() : String? {
+            return selectedSystem.name
+        }
+
+        fun bindGradingSystem(currentGradingSystem: GradingSystem, context: Context) {
             val resourceId = context.resources.getIdentifier(
-                gradingSystem.image,
+                currentGradingSystem.image,
                 "drawable", context.packageName
             )
             gradingSystemImage.setImageResource(resourceId)
-            gradingSystemText.text = gradingSystem.name
-            gradingSystemSubtext.text = gradingSystem.subtext
+            gradingSystemText.text = currentGradingSystem.name
+            gradingSystemSubtext.text = currentGradingSystem.subtext
             itemView.setOnClickListener {
-                gradeClick(gradingSystem)
                 if (convertIsStaged) {
-                    var convertToSystem = gradingSystem
-                    var convertFromSystem = selectedSystem
-                    readyToConvert = true
+                    toSystem = currentGradingSystem
+                    fromSystem = selectedSystem
+                    convertIsReady = true
                 } else {
-                    val gradeFrom = itemView.findViewById<TextView>(R.id.gradeFrom)
-                    gradeFrom.text = "Grade to convert FROM: ${gradingSystemText.text}\nSelect a grade to convert TO:"
                     unsetGrayscale(selectedImage)
                     selectedImage = gradingSystemImage
-                    selectedSystem = gradingSystem
+                    selectedSystem = currentGradingSystem
                     setGrayscale(selectedImage)
                     convertIsStaged = true
                 }
+                gradeClick(this)
             }
         }
     }
