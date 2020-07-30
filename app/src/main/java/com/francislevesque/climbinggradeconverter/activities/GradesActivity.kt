@@ -14,6 +14,8 @@ class GradesActivity : AppCompatActivity() {
 
     private lateinit var adapter: GradingSystemRecycleAdapter
 
+    // TODO: Reset choices when we return to this screen from a selection
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_grades)

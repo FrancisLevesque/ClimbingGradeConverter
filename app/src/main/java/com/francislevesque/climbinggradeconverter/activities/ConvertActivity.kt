@@ -1,8 +1,6 @@
 package com.francislevesque.climbinggradeconverter.activities
 
 import android.os.Bundle
-import android.widget.Adapter
-import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.francislevesque.climbinggradeconverter.R
@@ -13,8 +11,7 @@ import kotlinx.android.synthetic.main.activity_conversion.*
 
 class ConvertActivity : AppCompatActivity() {
 
-    private lateinit var fromAdapter: GradeRecycleAdapter
-    private lateinit var toAdapter: GradeRecycleAdapter
+    private lateinit var gradesAdapter: GradeRecycleAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,16 +23,12 @@ class ConvertActivity : AppCompatActivity() {
         fromTextTitle.text = fromSystem.name
         toTextTitle.text = toSystem.name
 
-        // TODO: Create a new partial layout file and place both datasets into the same array adapter
+        // TODO: Highlight row when selected
+        // TODO: Add background colours indicating general difficulties ranges
 
-        fromAdapter = GradeRecycleAdapter(this, fromSystem.dataset())
-        fromList.adapter = fromAdapter
-        val fromLayout = LinearLayoutManager(this)
-        fromList.layoutManager = fromLayout
-
-        toAdapter = GradeRecycleAdapter(this, toSystem.dataset())
-        toList.adapter = toAdapter
-        val toLayout = LinearLayoutManager(this)
-        toList.layoutManager = toLayout
+        gradesAdapter = GradeRecycleAdapter(this, fromSystem.dataset(), toSystem.dataset())
+        gradesList.adapter = gradesAdapter
+        val gradesLayout = LinearLayoutManager(this)
+        gradesList.layoutManager = gradesLayout
     }
 }

@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.francislevesque.climbinggradeconverter.R
 import com.francislevesque.climbinggradeconverter.models.GradingSystem
@@ -44,9 +45,13 @@ class GradingSystemRecycleAdapter(private val context: Context, private val grad
             gradingSystemSubtext.text = currentGradingSystem.subtext
             itemView.setOnClickListener {
                 if (convertIsStaged) {
-                    toSystem = currentGradingSystem
-                    fromSystem = selectedSystem
-                    convertIsReady = true
+                    if (currentGradingSystem == selectedSystem) {
+                      Toast.makeText(context, "Grading System already selected", Toast.LENGTH_SHORT).show()
+                    } else {
+                        toSystem = currentGradingSystem
+                        fromSystem = selectedSystem
+                        convertIsReady = true
+                    }
                 } else {
                     unsetGrayscale(selectedImage)
                     selectedImage = gradingSystemImage
