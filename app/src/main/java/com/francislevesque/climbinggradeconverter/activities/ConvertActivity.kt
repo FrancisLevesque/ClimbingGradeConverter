@@ -1,6 +1,7 @@
 package com.francislevesque.climbinggradeconverter.activities
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.francislevesque.climbinggradeconverter.R
@@ -23,7 +24,6 @@ class ConvertActivity : AppCompatActivity() {
         fromTextTitle.text = fromSystem.name
         toTextTitle.text = toSystem.name
 
-        // TODO: Highlight row when selected
         // TODO: Add background colours indicating general difficulties ranges
 
         gradesAdapter = GradeRecycleAdapter(this, fromSystem.dataset(), toSystem.dataset())
