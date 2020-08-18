@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="CLIMBING GRADE CONVERTER"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="@color/colorPrimary"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/climbingSelected"
+        android:id="@+id/climbingButton"
         android:layout_width="300dp"
         android:layout_height="200dp"
         android:layout_marginTop="60dp"
@@ -39,18 +39,18 @@
         android:layout_marginBottom="8dp"
         android:text="Climbing Grades"
         android:textColor="@color/colorWhite"
-        app:layout_constraintBottom_toBottomOf="@+id/climbingSelected"
-        app:layout_constraintStart_toStartOf="@+id/climbingSelected" />
+        app:layout_constraintBottom_toBottomOf="@+id/climbingButton"
+        app:layout_constraintStart_toStartOf="@+id/climbingButton" />
 
     <ImageView
-        android:id="@+id/boulderingSelected"
+        android:id="@+id/boulderingButton"
         android:layout_width="0dp"
         android:layout_height="200dp"
         android:layout_marginTop="32dp"
         android:scaleType="centerCrop"
-        app:layout_constraintEnd_toEndOf="@+id/climbingSelected"
-        app:layout_constraintStart_toStartOf="@+id/climbingSelected"
-        app:layout_constraintTop_toBottomOf="@+id/climbingSelected"
+        app:layout_constraintEnd_toEndOf="@+id/climbingButton"
+        app:layout_constraintStart_toStartOf="@+id/climbingButton"
+        app:layout_constraintTop_toBottomOf="@+id/climbingButton"
         app:srcCompat="@drawable/bouldering_sm" />
 
     <TextView
@@ -61,7 +61,7 @@
         android:layout_marginBottom="8dp"
         android:text="Bouldering Grades"
         android:textColor="@color/colorWhite"
-        app:layout_constraintBottom_toBottomOf="@+id/boulderingSelected"
-        app:layout_constraintStart_toStartOf="@+id/boulderingSelected" />
+        app:layout_constraintBottom_toBottomOf="@+id/boulderingButton"
+        app:layout_constraintStart_toStartOf="@+id/boulderingButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

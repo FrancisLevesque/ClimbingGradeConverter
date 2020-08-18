@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -11,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="CLIMBING GRADES"
+        android:text="CLIMBING SYSTEMS"
         android:textColor="@color/colorPrimary"
         android:textSize="16sp"
         android:textStyle="bold"
@@ -19,14 +20,49 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/gradeFrom"
+        android:id="@+id/gradeFromLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:text="Select a grade to convert FROM:"
+        android:text="Grade to convert from:"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/gradesTitle" />
+
+    <TextView
+        android:id="@+id/gradeFromText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="(please select a system)"
+        app:layout_constraintStart_toEndOf="@+id/gradeFromLabel"
+        app:layout_constraintTop_toTopOf="@+id/gradeFromLabel" />
+
+    <TextView
+        android:id="@+id/gradeToLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Grade to convert to:"
+        app:layout_constraintStart_toStartOf="@+id/gradeFromLabel"
+        app:layout_constraintTop_toBottomOf="@+id/gradeFromLabel" />
+
+    <TextView
+        android:id="@+id/gradeToText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@+id/gradeFromText"
+        app:layout_constraintTop_toBottomOf="@+id/gradeFromLabel" />
+
+    <ImageView
+        android:id="@+id/undoButton"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/gradeToLabel"
+        app:layout_constraintDimensionRatio="h,1:1"
+        app:layout_constraintEnd_toEndOf="@+id/climbingSystemsView"
+        app:layout_constraintTop_toTopOf="@+id/gradeFromLabel"
+        app:srcCompat="@drawable/ic_undo_24px" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/climbingSystemsView"
@@ -39,6 +75,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gradeFrom" />
+        app:layout_constraintTop_toBottomOf="@+id/gradeToLabel" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

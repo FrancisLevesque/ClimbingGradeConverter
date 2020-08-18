@@ -20,11 +20,12 @@ class ConvertActivity : AppCompatActivity() {
 
         val fromSystem = intent.getParcelableExtra<GradingSystem>(EXTRA_FROM_SYSTEM)
         val toSystem = intent.getParcelableExtra<GradingSystem>(EXTRA_TO_SYSTEM)
+        val climbingType = intent.getStringExtra(EXTRA_CLIMBING_TYPE)
 
         fromTextTitle.text = fromSystem.name
         toTextTitle.text = toSystem.name
 
-        gradesAdapter = GradeRecycleAdapter(this, fromSystem.dataset(), toSystem.dataset())
+        gradesAdapter = GradeRecycleAdapter(this, climbingType, fromSystem.dataset(), toSystem.dataset())
         gradesList.adapter = gradesAdapter
         val gradesLayout = LinearLayoutManager(this)
         gradesList.layoutManager = gradesLayout

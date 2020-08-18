@@ -35,6 +35,10 @@ class GradingSystemRecycleAdapter(private val context: Context, private val grad
             return selectedSystem.name
         }
 
+        fun toSystemName() : String? {
+            return toSystem.name
+        }
+
         fun bindGradingSystem(currentGradingSystem: GradingSystem, context: Context) {
             val resourceId = context.resources.getIdentifier(
                 currentGradingSystem.image,

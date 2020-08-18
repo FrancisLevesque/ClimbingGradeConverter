@@ -15,10 +15,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        boulderingSelected.setOnClickListener {
+        boulderingButton.setOnClickListener {
             startActivity("bouldering")
         }
-        climbingSelected.setOnClickListener {
+        climbingButton.setOnClickListener {
             startActivity("climbing")
         }
     }

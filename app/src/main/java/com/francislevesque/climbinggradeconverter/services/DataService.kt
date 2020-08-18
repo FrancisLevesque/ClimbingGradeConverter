@@ -1,13 +1,15 @@
 package com.francislevesque.climbinggradeconverter.services
 
 import android.graphics.Color
+import com.francislevesque.climbinggradeconverter.R
 import com.francislevesque.climbinggradeconverter.models.Grade
 import com.francislevesque.climbinggradeconverter.models.GradingSystem
 
 object DataService {
     val boulderSystems = listOf(
+        GradingSystem("V Scale", "usa", "(Hueco)"),
         GradingSystem("Font Scale", "france", "(Fontainebleau)"),
-        GradingSystem("V Scale", "usa", "(Hueco)")
+        GradingSystem("Brazilian Scale", "brazil")
     )
 
     val climbingSystems = listOf(
@@ -30,6 +32,34 @@ object DataService {
         }
     }
 
+    val v_scale = listOf<Grade>(
+        Grade("VB"), Grade("V0-"), Grade("V0"), Grade("V0+"),
+        Grade("V1"), Grade("V2"), Grade("V3"), Grade(""),
+        Grade("V4"), Grade(""), Grade("V5"), Grade(""),
+        Grade("V6"), Grade("V7"), Grade("V8"), Grade(""),
+        Grade("V9"), Grade("V10"), Grade("V11"), Grade("V12"),
+        Grade("V13"), Grade("V14"), Grade("V15"), Grade("V16"),
+        Grade("V17")
+    )
+    val font_scale = listOf<Grade>(
+        Grade("3"), Grade("4-"), Grade("4"), Grade("4+"),
+        Grade("5"), Grade("5+"), Grade("6A"), Grade("6A+"),
+        Grade("6B"), Grade("6B+"), Grade("6C"), Grade("6C+"),
+        Grade("7A"), Grade("7A+"), Grade("7B"), Grade("7B+"),
+        Grade("7C"), Grade("7C+"), Grade("8A"), Grade("8A+"),
+        Grade("8B"), Grade("8B+"), Grade("8C"), Grade("8C+"),
+        Grade("9A")
+    )
+    val brazil_scale = listOf<Grade>(
+        Grade("I"), Grade("II"), Grade("III"), Grade("IV"),
+        Grade("IV sup"), Grade("V"), Grade("VI"), Grade("VI"),
+        Grade("VI sup"), Grade("VI sup"), Grade("7a"), Grade("7b"),
+        Grade("7c"), Grade("8a"), Grade("8b"), Grade("8c"),
+        Grade("9a"), Grade("9b"), Grade("9c"), Grade("10a"),
+        Grade("10b"), Grade("10c"), Grade("11a"), Grade("11b"),
+        Grade("11c")
+    )
+
     val yds = listOf<Grade>(
         Grade("3–4"), Grade("5"), Grade("5.1"), Grade("5.2"),
         Grade("5.3"), Grade("5.4"), Grade("5.5"), Grade("5.6"),
@@ -41,7 +71,6 @@ object DataService {
         Grade("5.14b"), Grade("5.14c"), Grade("5.14d"), Grade("5.15a"),
         Grade("5.15b"), Grade("5.15c"), Grade("5.15d")
     )
-
     val british = listOf<Grade>(
         Grade("1/M"), Grade(""), Grade("2"), Grade("D"),
         Grade("3"), Grade("VD"), Grade("4a/S"), Grade("4b/HS"),
@@ -53,7 +82,6 @@ object DataService {
         Grade(""), Grade("7b/E11"), Grade(""), Grade(""),
         Grade(""), Grade(""), Grade("")
     )
-
     val french = listOf<Grade>(
         Grade("1"), Grade(""), Grade("2"), Grade(""),
         Grade("3"), Grade("4a"), Grade("4b"), Grade("4c"),
@@ -65,7 +93,6 @@ object DataService {
         Grade("8c"), Grade("8c+"), Grade("9a"), Grade("9a+"),
         Grade("9b"), Grade("9b+"), Grade("9c")
     )
-
     val uiaa = listOf<Grade>(
         Grade("I"), Grade(""), Grade("II"), Grade(""),
         Grade("III"), Grade("IV"), Grade("IV+/V-"), Grade("V"),
@@ -77,7 +104,6 @@ object DataService {
         Grade(""), Grade("XI-"), Grade("XI"), Grade("XI+"),
         Grade(""), Grade("XII-"), Grade("XII")
     )
-
     val saxon = listOf<Grade>(
         Grade("I"), Grade(""), Grade("II"), Grade(""),
         Grade("III"), Grade("IV"), Grade("V"), Grade("VI"),
@@ -89,7 +115,6 @@ object DataService {
         Grade(""), Grade("XIIa"), Grade(""), Grade(""),
         Grade(""), Grade(""), Grade("")
     )
-
     val ewbank = listOf<Grade>(
         Grade("1–2"), Grade("3–4"), Grade("5–6"), Grade("7"),
         Grade("8–9"), Grade("10"), Grade("11–12"), Grade("13"),
@@ -101,7 +126,6 @@ object DataService {
         Grade("33"), Grade("34"), Grade("35"), Grade("36"),
         Grade("37"), Grade("38"), Grade("39")
     )
-
     val ewbank_sa = listOf<Grade>(
         Grade("1–2"), Grade("3–4"), Grade("5–6"), Grade("7"),
         Grade("8–9"), Grade("10"), Grade("11–12"), Grade("13"),
@@ -113,7 +137,6 @@ object DataService {
         Grade("35"), Grade("36"), Grade("37"), Grade("38"),
         Grade("39"), Grade("40"), Grade("")
     )
-
     val brazilian = listOf<Grade>(
         Grade("I"), Grade("I sup"), Grade("II"), Grade("II sup"),
         Grade(""), Grade("III"), Grade("III sup"), Grade("IV"),
@@ -125,7 +148,6 @@ object DataService {
         Grade("11a"), Grade("11b"), Grade("11c"), Grade("12a"),
         Grade("12b"), Grade("12c"), Grade("")
     )
-
     val kurtyka = listOf<Grade>(
         Grade("I"), Grade(""), Grade("II"), Grade(""),
         Grade("III"), Grade("IV"), Grade(""), Grade("IV+"),
@@ -138,8 +160,45 @@ object DataService {
         Grade(""), Grade(""), Grade("")
     )
 
+    fun fetchGradingCount(type: String) : Int {
+        return when (type) {
+            "climbing" -> 35
+            "bouldering" -> 25
+            else -> 0
+        }
+    }
+
+    fun fetchGradingColour(type: String, index: Int) : Int {
+        return when (type) {
+            "climbing" -> when (index) {
+                in 0..9 -> R.color.blue
+                in 10..14 -> R.color.green
+                in 15..19 -> R.color.yellow
+                in 20..23 -> R.color.orange
+                in 24..29 -> R.color.red
+                in 30..35 -> R.color.black
+                else -> R.color.black
+            }
+            "bouldering" -> when (index) {
+                in 0..2 -> R.color.blue
+                in 3..8 -> R.color.green
+                in 9..13 -> R.color.yellow
+                in 14..17 -> R.color.orange
+                in 18..21 -> R.color.red
+                in 22..25 -> R.color.black
+                else -> R.color.black
+            }
+            else -> 0
+        }
+    }
+
     fun fetchGrades(type: String?) : List<Grade> {
         return when (type) {
+            // Bouldering
+            "Font Scale" -> font_scale
+            "V Scale" -> v_scale
+            "Brazilian Scale" -> brazil_scale
+            // Climbing
             "YDS" -> yds
             "British" -> british
             "French" -> french
