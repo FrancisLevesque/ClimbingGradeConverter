@@ -24,8 +24,6 @@ class ConvertActivity : AppCompatActivity() {
         fromTextTitle.text = fromSystem.name
         toTextTitle.text = toSystem.name
 
-        // TODO: Add background colours indicating general difficulties ranges
-
         gradesAdapter = GradeRecycleAdapter(this, fromSystem.dataset(), toSystem.dataset())
         gradesList.adapter = gradesAdapter
         val gradesLayout = LinearLayoutManager(this)

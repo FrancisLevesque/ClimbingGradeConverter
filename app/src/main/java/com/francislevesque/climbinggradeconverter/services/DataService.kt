@@ -1,5 +1,6 @@
 package com.francislevesque.climbinggradeconverter.services
 
+import android.graphics.Color
 import com.francislevesque.climbinggradeconverter.models.Grade
 import com.francislevesque.climbinggradeconverter.models.GradingSystem
 

@@ -1,9 +1,7 @@
 package com.francislevesque.climbinggradeconverter.adapters
 
-import android.R.color
 import android.content.Context
 import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -48,10 +46,18 @@ class GradeRecycleAdapter(private val context: Context, private val fromGrades: 
         }
 
         if (position == index) {
-            holder.itemView.fromBackground.setBackgroundColor(Color.parseColor("#227755"))
-            holder.itemView.toBackground.setBackgroundColor(Color.parseColor("#557722"))
+            holder.itemView.fromBackground.setBackgroundColor(context.getColor(R.color.colorSelection))
+            holder.itemView.toBackground.setBackgroundColor(context.getColor(R.color.colorSelectionAlt))
         } else {
-            val color = context.getColor(R.color.colorPrimaryDark)
+            val color = context.getColor(when(position) {
+                in 0..9 -> R.color.blue
+                in 10..14 -> R.color.green
+                in 15..19 -> R.color.yellow
+                in 20..23 -> R.color.orange
+                in 24..29 -> R.color.red
+                in 30..39 -> R.color.black
+                else -> R.color.black
+            })
             holder.itemView.fromBackground.setBackgroundColor(color)
             holder.itemView.toBackground.setBackgroundColor(color)
         }
