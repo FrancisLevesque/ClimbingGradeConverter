@@ -16,7 +16,6 @@ class GradesActivity : AppCompatActivity() {
     private val selectText = "(please select a system)"
 
     // TODO: Add undo button to reselect first choice
-    // TODO: For grayscaling images, do it in onBindViewHolder like GradeRecycleAdapter so we don't have recycled adapter items reusing the disabled colour by accident
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,14 +24,14 @@ class GradesActivity : AppCompatActivity() {
         val climbingType = intent.getStringExtra(EXTRA_CLIMBING_TYPE)
         val gradingSet = DataService.fetchGradingSet(climbingType)
 
-        adapter = GradingSystemRecycleAdapter(this, gradingSet) { currentSelection ->
-            gradeFromText.text = currentSelection.fromSystemName()
+        adapter = GradingSystemRecycleAdapter(this, gradingSet) {
+            gradeFromText.text = adapter.fromSystemName()
             gradeToText.text = selectText
-            if (currentSelection.readyToConvert()) {
-                gradeToText.text = currentSelection.toSystemName()
+            if (adapter.readyToConvert()) {
+                gradeToText.text = adapter.toSystemName()
                 val conversionIntent = Intent(this, ConvertActivity::class.java)
-                conversionIntent.putExtra(EXTRA_FROM_SYSTEM, currentSelection.fromSystem)
-                conversionIntent.putExtra(EXTRA_TO_SYSTEM, currentSelection.toSystem)
+                conversionIntent.putExtra(EXTRA_FROM_SYSTEM, adapter.fromSystem)
+                conversionIntent.putExtra(EXTRA_TO_SYSTEM, adapter.toSystem)
                 conversionIntent.putExtra(EXTRA_CLIMBING_TYPE, climbingType)
                 startActivity(conversionIntent)
             }
@@ -46,5 +45,6 @@ class GradesActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         gradeToText.text = selectText
+        adapter.convertIsReady = false
     }
 }
