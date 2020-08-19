@@ -92,8 +92,10 @@ class GradingSystemRecycleAdapter(private val context: Context, private val grad
             notifyDataSetChanged()
         }
 
-        if (!convertIsReady) {
-            val image= holder.itemView.findViewById<ImageView>(R.id.gradingSystemImage)
+        val image= holder.itemView.findViewById<ImageView>(R.id.gradingSystemImage)
+        if (!convertIsStaged && !convertIsReady) {
+            unsetGrayscale(image)
+        } else if (convertIsStaged && !convertIsReady) {
             if (position == index) {
                 setGrayscale(image)
             } else {

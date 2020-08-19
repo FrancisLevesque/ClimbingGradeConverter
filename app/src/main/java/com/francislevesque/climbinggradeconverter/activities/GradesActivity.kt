@@ -2,7 +2,9 @@ package com.francislevesque.climbinggradeconverter.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.francislevesque.climbinggradeconverter.R
 import com.francislevesque.climbinggradeconverter.adapters.GradingSystemRecycleAdapter
@@ -15,18 +17,26 @@ class GradesActivity : AppCompatActivity() {
     private lateinit var adapter: GradingSystemRecycleAdapter
     private val selectText = "(please select a system)"
 
-    // TODO: Add undo button to reselect first choice
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_grades)
+
+        undoButton.visibility = View.INVISIBLE
+        undoButton.setOnClickListener {button ->
+            if (button.visibility == View.VISIBLE) {
+                gradeFromText.text = selectText
+                adapter.convertIsStaged = false
+                adapter.notifyDataSetChanged()
+                button.visibility = View.INVISIBLE
+            }
+        }
 
         val climbingType = intent.getStringExtra(EXTRA_CLIMBING_TYPE)
         val gradingSet = DataService.fetchGradingSet(climbingType)
 
         adapter = GradingSystemRecycleAdapter(this, gradingSet) {
             gradeFromText.text = adapter.fromSystemName()
-            gradeToText.text = selectText
+            undoButton.visibility = View.VISIBLE
             if (adapter.readyToConvert()) {
                 gradeToText.text = adapter.toSystemName()
                 val conversionIntent = Intent(this, ConvertActivity::class.java)
