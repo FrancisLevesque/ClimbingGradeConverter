@@ -42,14 +42,15 @@ class GradeRecycleAdapter(private val context: Context, private val climbingType
             index = position
             notifyDataSetChanged()
         }
+        val color = context.getColor(DataService.fetchGradingColour(climbingType, position))
+        holder.itemView.gradeRow.setBackgroundColor(color)
 
         if (position == index) {
             holder.itemView.fromBackground.setBackgroundColor(context.getColor(R.color.colorSelection))
             holder.itemView.toBackground.setBackgroundColor(context.getColor(R.color.colorSelectionAlt))
         } else {
-            val color = context.getColor(DataService.fetchGradingColour(climbingType, position))
-            holder.itemView.fromBackground.setBackgroundColor(color)
-            holder.itemView.toBackground.setBackgroundColor(color)
+            holder.itemView.fromBackground.setBackgroundColor(context.getColor(R.color.colorPrimaryDark))
+            holder.itemView.toBackground.setBackgroundColor(context.getColor(R.color.colorPrimaryDark))
         }
     }
 }
