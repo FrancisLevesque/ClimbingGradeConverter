@@ -43,11 +43,10 @@ class GradeRecycleAdapter(private val context: Context, private val climbingType
             notifyDataSetChanged()
         }
         val color = context.getColor(DataService.fetchGradingColour(climbingType, position))
-        holder.itemView.gradeRow.setBackgroundColor(color)
 
         if (position == index) {
-            holder.itemView.fromBackground.setBackgroundColor(context.getColor(R.color.colorSelection))
-            holder.itemView.toBackground.setBackgroundColor(context.getColor(R.color.colorSelectionAlt))
+            holder.itemView.fromBackground.setBackgroundColor(color)
+            holder.itemView.toBackground.setBackgroundColor(color)
         } else {
             holder.itemView.fromBackground.setBackgroundColor(context.getColor(R.color.colorPrimaryDark))
             holder.itemView.toBackground.setBackgroundColor(context.getColor(R.color.colorPrimaryDark))
