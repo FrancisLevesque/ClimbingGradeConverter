@@ -3,7 +3,6 @@ package com.francislevesque.climbinggradeconverter.adapters
 import android.content.Context
 import android.graphics.ColorMatrix
 import android.graphics.ColorMatrixColorFilter
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,15 +12,13 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.francislevesque.climbinggradeconverter.R
 import com.francislevesque.climbinggradeconverter.models.GradingSystem
-import com.francislevesque.climbinggradeconverter.services.DataService
-import kotlinx.android.synthetic.main.grade_list_items.view.*
 
 class GradingSystemRecycleAdapter(private val context: Context, private val gradingSystems: List<GradingSystem>, private val gradeClick : (Unit) -> Unit) : RecyclerView.Adapter<GradingSystemRecycleAdapter.Holder>() {
     var convertIsStaged = false
     var convertIsReady = false
     lateinit var fromSystem : GradingSystem
     lateinit var toSystem : GradingSystem
-    var index = -1
+    var selectedIndex = -1
 
     inner class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val gradingSystemImage = itemView.findViewById<ImageView>(R.id.gradingSystemImage)
@@ -76,7 +73,6 @@ class GradingSystemRecycleAdapter(private val context: Context, private val grad
         holder.bindGradingSystem(currentGradingSystem, context)
 
         holder.itemView.setOnClickListener {
-            index = position
             if (convertIsStaged) {
                 if (currentGradingSystem == fromSystem) {
                     Toast.makeText(context, "Grading System already selected", Toast.LENGTH_SHORT).show()
@@ -85,6 +81,7 @@ class GradingSystemRecycleAdapter(private val context: Context, private val grad
                     convertIsReady = true
                 }
             } else {
+                selectedIndex = position
                 fromSystem = currentGradingSystem
                 convertIsStaged = true
             }
@@ -96,7 +93,7 @@ class GradingSystemRecycleAdapter(private val context: Context, private val grad
         if (!convertIsStaged && !convertIsReady) {
             unsetGrayscale(image)
         } else if (convertIsStaged && !convertIsReady) {
-            if (position == index) {
+            if (position == selectedIndex) {
                 setGrayscale(image)
             } else {
                 unsetGrayscale(image)
